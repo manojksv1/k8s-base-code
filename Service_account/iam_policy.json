@@ -1,0 +1,16 @@
+{
+    "Id": "Policy1713699234456",
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1713699149061",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion",
+                "s3:ListBucket"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::codepipeline-ap-south-1-667445731572"
+        }
+    ]
+}
