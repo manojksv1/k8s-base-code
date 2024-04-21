@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::637423386220:role/eksctl-eksdemo1-nodegroup-eksdemo1-NodeInstanceRole-17HEunBiakbt
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - userarn: arn:aws:iam::637423386220:user/eks-cluster-trainee
+      username: eks-trainee
+    - userarn: arn:aws:iam::637423386220:user/eks-cluster-developer
+      username: eks-developer
+    - userarn: arn:aws:iam::637423386220:user/eks-cluster-super-admin
+      groups:
+      - system:masters
+      username: eks-super-admin

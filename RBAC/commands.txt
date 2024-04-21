@@ -1,0 +1,5 @@
+kubectl apply -f role_mapping/eks_trainee.yml 
+
+kubectl apply -f role_mapping/eks_developer.yml
+
+kubectl apply -f aws_auth.yml
