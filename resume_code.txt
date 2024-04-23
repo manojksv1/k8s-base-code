@@ -1,0 +1,258 @@
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
+
+\usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
+
+\usepackage{color} % provides both foreground and background color management
+
+\usepackage{enumitem} % provides control over enumerate, itemize and description
+
+\usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
+
+\usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
+
+\usepackage{latexsym} % provides mathematical symbols
+
+\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
+
+\usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
+
+\usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
+
+\usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
+
+\usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+%-----------------------------------------
+
+\input glyphtounicode % converts glyph names to unicode
+\pdfgentounicode=1 % ensures pdfs generated are ats readable
+
+%----------FONT OPTIONS-------------------
+\usepackage[default]{sourcesanspro} % uses the font source sans pro
+\urlstyle{same} % changes url font from default urlfont to font being used by the document
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy} % set page style to one configured by fancyhdr
+\fancyhf{} % clear all header and footer fields
+
+\renewcommand{\headrulewidth}{0in} % sets thickness of linerule under header to zero
+\renewcommand{\footrulewidth}{0in} % sets thickness of linerule over footer to zero
+
+\setlength{\tabcolsep}{0in} % sets thickness of column separator in tables to zero
+
+% origin of the document is one inch from the top and from and the left
+% oddsidemargin and evensidemargin both refer to the left margin
+% right margin is indirectly set using oddsidemargin
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in} % sets width of text area in the page to one inch
+\addtolength{\textheight}{1.0in} % sets height of text area in the page to one inch
+
+\raggedbottom{} % makes all pages the height of current page, no extra vertical space added
+\raggedright{} % makes all pages the width of current page, no extra horizontal space added
+%------------------------------------------
+
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+% redefines the style of the bullet point
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% redefines the underline depth to 2pt
+\renewcommand{\ULdepth}{2pt}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+%\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
+
+% resumeItem renders a bullet point
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% commands to start and end itemization of resumeItem, rightmargin set to 0.11in to avoid the overflow of resumetItem beyond whatever resumeItemHeading is being used
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+% resumeTrioHeading renders three elements in three columns with second element being italicized and first element bolded, can be used for projects with three elements
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+% resumeQuadHeading renders four elements in a two columns with the second row being italicized and first element of first row bolded, can be used for experience and projects with four elements
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+% commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+% You can rearrange sections in any order you may prefer
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+% Make sure all the details are correct, you can add more links in the first row of second column if needed
+
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Huge Manoj S \vspace{2pt}} & % row = 1, col = 1
+  Location: Bengaluru, India \\ % row = 1, col = 2 % row = 2, col = 1
+  \href{https://www.linkedin.com/in/manoj-s-51377b2ba/}{\uline{LinkedIn}}& % row = 2, col = 1
+  Email: \href{mailto:manoj.ksv1@gmail.com}{\uline{manoj.ksv1@gmail.com}} $|$ % row = 2, col = 2
+  Mobile: +91 9886772109 \\ % row = 2, col = 2
+\end{tabular*}
+%--------------------------------------------
+
+
+%-----------SUMMARY--------------------------
+% Keep this short, simple and straigth to point
+
+\section{Cloud Engineer}
+\small{
+  Cloud engineer with \textbf{2.8 years} of experience specializing in \textbf{AWS}, \textbf{Kubernetes}, \textbf{Docker}, \textbf{Terraform}, and \textbf{Ansible}. Proficient in infrastructure management, automation, and deployment pipelines, encompassing \textbf{CI/CD} processes. Adept at developing efficient solutions to enhance cloud infrastructure, with a strong emphasis on reliability and security.
+}
+%--------------------------------------------
+
+
+%--------------SKILLS------------------------
+% Add or remove resumeSectionTypes according to your needs
+
+\section{Technical Skills}
+  \resumeHeadingListStart{}
+    \resumeSectionType{Cloud}{:}{Amazon Web Services}
+    \resumeSectionType{Tools}{:}{Docker, K8s, Terraform, Ansible}
+    \resumeSectionType{VCS}{:}{Git, Github, Codecommit}
+    \resumeSectionType{CI/CD}{:}{CodePipeline, CodeBuild, CodeDeploy}
+    \resumeSectionType{OS}{:}{Linux, Windows}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------EXPERIENCE-----------------------
+% Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
+
+\section{Experience}
+\resumeHeadingListStart{}
+  \resumeQuadHeading{Cloud Engineer}{Sep 2021 -- Present}
+  {Sysarks Technology Solutions Pvt. Ltd}{onsite -- Bengaluru, India}
+    \resumeItemListStart{}
+      \resumeItem{Design and implement AWS cloud solutions, leveraging services like \textbf{IAM}, \textbf{EC2}, \textbf{RDS}, \textbf{Lambda}, \textbf{EKS}, \textbf{ECR}, \textbf{IoT Core} etc.}
+      \resumeItem{Collaborate with development teams to ensure seamless integration of cloud-native applications.}
+      \resumeItem{Manage AWS resources to support diverse application workloads efficiently.}
+      \resumeItem{Implement robust security measures and automate infrastructure.}
+      \resumeItem{Promote DevOps practices by integrating \textbf{CI/CD} pipelines with AWS services.}
+      \resumeItem{Monitor AWS infrastructure and proactively address performance issues.}
+      \resumeItem{Stay updated on AWS services to optimize system architecture and performance.}
+      
+    \resumeItemListEnd{}
+
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+%-----------PROJECTS--------------------------
+% Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
+
+\section{Projects}
+  \resumeHeadingListStart{}
+    \resumeTrioHeading{Project: Smart Mining Solution}{}{\href{}{\uline{}}}
+    \resumeTrioHeading{Phase 1: AWS Architecture Design}{}{\href{}{\uline{}}}
+      \resumeItemListStart{}
+        \resumeItem{Gathered all client requirements comprehensively.}
+        \resumeItem{Clearly defined requirements in documented form and obtained approval.}
+        \resumeItem{Designed architecture based on approved documents, ensuring alignment with project manager's expectations.}
+        \resumeItem{Strongly enforced a \textbf{DevOps} culture to enhance application delivery through automation, testing, quality assurance, and continuous monitoring.}
+      \resumeItemListEnd{}
+      \resumeTrioHeading{Phase 2: AWS Infrastructure Development and Deployment}{RDS, S3, Route53, SQS, IoT Core, and Lambda}{\href{}{\uline{}}}
+      \resumeItemListStart{}
+        \resumeItem{Utilized AWS services including \textbf{IAM, EC2, EKS, ECR} as per architecture design.}
+        \resumeItem{Leveraged Terraform for infrastructure as code to build cloud infrastructure from architecture documents.}
+        \resumeItem{Conducted thorough testing in AWS environment, rectifying any errors and obtaining project manager's approval.}
+        \resumeItem{Established separate workspaces for development, user acceptance testing (UAT), and production environments, ensuring infrastructure isolation.}
+      \resumeItemListEnd{}
+      \resumeTrioHeading{Phase 3: Weighbridge and ANPR Camera Integration}{}{\href{}{\uline{}}}
+      \resumeItemListStart{}
+        \resumeItem{Identified and procured necessary devices for weighbridge integration in Dubai mining operations.}
+        \resumeItem{Developed a solution plan.}
+        \resumeItem{Integrated ANPR and weighbridge systems using Python, securely communicating data to AWS cloud via \textbf{SQS}.}
+        \resumeItem{Established secure and reliable communication between weighbridge and Smart Mining Solution.}
+      \resumeItemListEnd{}
+    \resumeTrioHeading{}{}{\href{}{\uline{}}}
+        \resumeTrioHeading{Phase 4: Traffic Light Integration}{}{\href{}{\uline{}}}
+      \resumeItemListStart{}
+        \resumeItem{Prepared microcontroller code for \textbf{traffic light control}.}
+        \resumeItem{Connected microcontroller to AWS cloud using \textbf{AWS IoT Core and Lambda} for remote traffic light control.}
+        \resumeItem{Ensured efficient, reliable, and secure communication between Smart Mining Solution and traffic lights.}
+      \resumeItemListEnd{}
+      \resumeTrioHeading{Phase 5: Event-Based APK Delivery for Testing}{}{\href{}{\uline{}}}
+      \resumeItemListStart{}
+        \resumeItem{Facilitated automated APK delivery for testing printer activity.}
+        \resumeItem{Created an API for Android developers to upload APKs, leveraging API Gateway, Lambda, S3, EventBridge, and SNS services to promptly send URLs to the testing team in Dubai.}
+      \resumeItemListEnd{}
+      
+      
+%--------------------------------------------
+%-----------EDUCATION-------------------------
+% Mention your CGPA, if its good, in the first row of second column
+
+\section{Education}
+  \resumeHeadingListStart{}
+    \resumeQuadHeading{Bachelor of Technology}{GITAM Institute of Technology, Bengaluru}
+    {Electronics and Communication Engineering - 7.77 CGPA}{May 2017 -- may 2021}
+    \resumeQuadHeading{PUC}{Government PU College, Doddabelavangala}
+    {PCMB - 69Percentage}{June 2015 -- may 2017}
+  \resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%----------------OTHERS----------------------
+% You can add your acheivements, accolades, certifications etc. here.
+
+\section{Certifications}
+  \resumeItemListStart{}
+    \resumeItem{\href{https://www.credly.com/badges/64580c8a-6436-4dc5-92d6-f6d377545699}{\uline{AWS Certified Developer - Associate}}}
+  \resumeItemListEnd{}
+%--------------------------------------------
+
+\end{document}
