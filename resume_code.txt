@@ -196,7 +196,7 @@
 
 \section{Projects}
   \resumeHeadingListStart{}
-    \resumeTrioHeading{Project: Smart Mining Solution}{}{\href{}{\uline{}}}
+    \resumeTrioHeading{\uline{Project: Smart Mining Solution}}{RDS, S3, Route53, SQS, IoT Core, and Lambda}{\href{}{\uline{}}}
     \resumeTrioHeading{Phase 1: AWS Architecture Design}{}{\href{}{\uline{}}}
       \resumeItemListStart{}
         \resumeItem{Gathered all client requirements comprehensively.}
@@ -204,9 +204,9 @@
         \resumeItem{Designed architecture based on approved documents, ensuring alignment with project manager's expectations.}
         \resumeItem{Strongly enforced a \textbf{DevOps} culture to enhance application delivery through automation, testing, quality assurance, and continuous monitoring.}
       \resumeItemListEnd{}
-      \resumeTrioHeading{Phase 2: AWS Infrastructure Development and Deployment}{RDS, S3, Route53, SQS, IoT Core, and Lambda}{\href{}{\uline{}}}
+      \resumeTrioHeading{Phase 2: AWS Infrastructure Development and Deployment}{}{\href{}{\uline{}}}
       \resumeItemListStart{}
-        \resumeItem{Utilized AWS services including \textbf{IAM, EC2, EKS, ECR} as per architecture design.}
+        \resumeItem{Utilized AWS services including \textbf{IAM, EC2, EKS, ECR} along with \textbf{Docker, k8s }as per architecture design.}
         \resumeItem{Leveraged Terraform for infrastructure as code to build cloud infrastructure from architecture documents.}
         \resumeItem{Conducted thorough testing in AWS environment, rectifying any errors and obtaining project manager's approval.}
         \resumeItem{Established separate workspaces for development, user acceptance testing (UAT), and production environments, ensuring infrastructure isolation.}
@@ -215,9 +215,10 @@
       \resumeItemListStart{}
         \resumeItem{Identified and procured necessary devices for weighbridge integration in Dubai mining operations.}
         \resumeItem{Developed a solution plan.}
-        \resumeItem{Integrated ANPR and weighbridge systems using Python, securely communicating data to AWS cloud via \textbf{SQS}.}
+        \resumeItem{Integrated \textbf{ANPR and weighbridge systems using Python}, securely communicating data to AWS cloud via \textbf{SQS}.}
         \resumeItem{Established secure and reliable communication between weighbridge and Smart Mining Solution.}
       \resumeItemListEnd{}
+      
     \resumeTrioHeading{}{}{\href{}{\uline{}}}
         \resumeTrioHeading{Phase 4: Traffic Light Integration}{}{\href{}{\uline{}}}
       \resumeItemListStart{}
@@ -230,8 +231,24 @@
         \resumeItem{Facilitated automated APK delivery for testing printer activity.}
         \resumeItem{Created an API for Android developers to upload APKs, leveraging API Gateway, Lambda, S3, EventBridge, and SNS services to promptly send URLs to the testing team in Dubai.}
       \resumeItemListEnd{}
+      \resumeTrioHeading{}{}{\href{}{\uline{}}}
+       \resumeTrioHeading{\uline{Project: Kores india}}{}{\href{https://github.com/manojksv1/kms-documents}{\uline{Source Code}}}
+     \resumeItemListStart{}
+        \resumeItem{Gathered information from the client about their requirements regarding encryption mechanism.}
+        \resumeItem{Proposed the solution using \textbf{AWS KMS encryption} mechanism with detailed documents.}
+        \resumeItem{Once the client approved the proposal, built the solution using \textbf{Boto3} in Python.}
+        \resumeItem{Tested the code, ensuring everything worked fine, then collaborated with the Android developer to convert the code into Android Java.}
+        \resumeItem{After thorough testing of all code components, sent the final Source Code to the clients.}
+      \resumeItemListEnd{}
       
-      
+    \resumeTrioHeading{}{}{\href{}{\uline{}}}
+    \resumeTrioHeading{\uline{Project: MannaHeal Healthcare Platform}}{}{\href{}{\uline{}}}
+     \resumeItemListStart{}
+        \resumeItem{Database Server Setup along with Web Server and Client Server Setup in Client's AWS Account.}
+        \resumeItem{Database Backup and Restore for Both Client and Developer Side.}
+        \resumeItem{Assisted in Implementing \textbf{AWS Bedrock API} Integration with Our Application.}
+      \resumeItemListEnd{}
+
 %--------------------------------------------
 %-----------EDUCATION-------------------------
 % Mention your CGPA, if its good, in the first row of second column
