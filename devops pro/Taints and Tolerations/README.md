@@ -41,3 +41,6 @@ Solution: Use the following command to remove the taint from the node:
 ```
 kubectl taint nodes <node_name> run=mypod:NoSchedule-
 ```
+Noschedule
+PreferNoSchedule
+NoExecute

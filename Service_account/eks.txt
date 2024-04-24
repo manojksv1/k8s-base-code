@@ -10,11 +10,10 @@ eksctl utils associate-iam-oidc-provider --region ap-south-1 --cluster eksdemo1 
 
 eksctl create nodegroup --cluster=eksdemo1 --region=ap-south-1 --name=eksdemo1-ng-public1 --node-type=t3.medium --nodes=2 --nodes-min=2 --nodes-max=2 --node-volume-size=15 --ssh-access --ssh-public-key=ksv --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access 
 
-
-curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.1/docs/install/iam_policy.json
+#create a policy using iam_policy.json
 
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-name k8spodservicepolicy \
     --policy-document file://iam_policy.json
 
 
@@ -23,7 +22,7 @@ eksctl create iamserviceaccount \
   --namespace=kube-system \
   --name=s3-read-access \
   --role-name s3_read_bucket \
-  --attach-policy-arn=arn:aws:iam::637423386220:policy/s3_read_bucket \
+  --attach-policy-arn=arn:aws:iam::637423386220:policy/k8spodservicepolicy \
   --approve
 
 
@@ -31,35 +30,5 @@ kubectl get serviceaccount -n kube-system -o yaml    ("verify anotaion")
 
 eksctl get iamserviceaccount --cluster eksdemo1 --region ap-south-1
 
-
-
-$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-$ chmod 700 get_helm.sh
-$ ./get_helm.sh
-
-helm repo add eks https://aws.github.io/eks-charts
-
-helm repo update eks
-
-helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
-  -n kube-system \
-  --set clusterName=eksdemo1 \
-  --set serviceAccount.create=false \
-  --set serviceAccount.name=aws-load-balancer-controller 
-
-helm search repo eks/aws-load-balancer-controller --versions
-
-
-eksctl get clusters
-
-eksctl get nodegroup --cluster=eksdemo1
-
-eksctl delete nodegroup --cluster=eksdemo1 --name=eksdemo1-ng-public1
-
+#delete cluster
 eksctl delete cluster eksdemo1
-
-
-kubectl create secret generic dbpassword --from-literal=PGPASSWORD="manoj1212@"
-
-docker pull manojvaibhav2019/server:v1
-
