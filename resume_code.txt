@@ -139,9 +139,11 @@
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\Huge Manoj S \vspace{2pt}} & % row = 1, col = 1
   Location: Bengaluru, India \\ % row = 1, col = 2 % row = 2, col = 1
-  \href{https://www.linkedin.com/in/manoj-s-51377b2ba/}{\uline{LinkedIn}}& % row = 2, col = 1
-  Email: \href{mailto:manoj.ksv1@gmail.com}{\uline{manoj.ksv1@gmail.com}} $|$ % row = 2, col = 2
+  \textbf{\textcolor{blue}{Cloud Engineer}}
+   % row = 2, col = 1
+  &Email: \href{mailto:manoj.ksv1@gmail.com}{\uline{manoj.ksv1@gmail.com}} $|$ % row = 2, col = 2
   Mobile: +91 9886772109 \\ % row = 2, col = 2
+  &\href{https://www.linkedin.com/in/manoj-s-51377b2ba/}{{LinkedIn: \uline{www.linkedin.com/in/manoj-s-51377b2ba}}}
 \end{tabular*}
 %--------------------------------------------
 
@@ -149,9 +151,9 @@
 %-----------SUMMARY--------------------------
 % Keep this short, simple and straigth to point
 
-\section{Cloud Engineer}
+\section{}
 \small{
-  Cloud engineer with \textbf{2.8 years} of experience specializing in \textbf{AWS}, \textbf{Kubernetes}, \textbf{Docker}, \textbf{Terraform}, and \textbf{Ansible}. Proficient in infrastructure management, automation, and deployment pipelines, encompassing \textbf{CI/CD} processes. Adept at developing efficient solutions to enhance cloud infrastructure, with a strong emphasis on reliability and security.
+  Cloud engineer with \textbf{2.8 years} of experience specializing in \textbf{AWS}, \textbf{Kubernetes}, \textbf{Docker}, and \textbf{Terraform}. Proficient in infrastructure management, automation, and deployment pipelines, encompassing \textbf{CI/CD} processes. Adept at developing efficient solutions to enhance cloud infrastructure, with a strong emphasis on reliability and security.
 }
 %--------------------------------------------
 
@@ -162,10 +164,10 @@
 \section{Technical Skills}
   \resumeHeadingListStart{}
     \resumeSectionType{Cloud}{:}{Amazon Web Services}
-    \resumeSectionType{Tools}{:}{Docker, K8s, Terraform, Ansible}
+    \resumeSectionType{DevOps Tools}{:}{Docker, K8s, Terraform, Ansible}
     \resumeSectionType{VCS}{:}{Git, Github, Codecommit}
     \resumeSectionType{CI/CD}{:}{CodePipeline, CodeBuild, CodeDeploy}
-    \resumeSectionType{OS}{:}{Linux, Windows}
+    \resumeSectionType{Programming Language}{:}{Python}
   \resumeHeadingListEnd{}
 %--------------------------------------------
 
@@ -206,7 +208,7 @@
       \resumeItemListEnd{}
       \resumeTrioHeading{Phase 2: AWS Infrastructure Development and Deployment}{}{\href{}{\uline{}}}
       \resumeItemListStart{}
-        \resumeItem{Utilized AWS services including \textbf{IAM, EC2, EKS, ECR} along with \textbf{Docker, k8s }as per architecture design.}
+        \resumeItem{Utilized AWS services including \textbf{IAM, EC2, ALB, EKS, ECR} along with \textbf{Docker, k8s }as per architecture design.}
         \resumeItem{Leveraged Terraform for infrastructure as code to build cloud infrastructure from architecture documents.}
         \resumeItem{Conducted thorough testing in AWS environment, rectifying any errors and obtaining project manager's approval.}
         \resumeItem{Established separate workspaces for development, user acceptance testing (UAT), and production environments, ensuring infrastructure isolation.}
@@ -232,7 +234,7 @@
         \resumeItem{Created an API for Android developers to upload APKs, leveraging API Gateway, Lambda, S3, EventBridge, and SNS services to promptly send URLs to the testing team in Dubai.}
       \resumeItemListEnd{}
       \resumeTrioHeading{}{}{\href{}{\uline{}}}
-       \resumeTrioHeading{\uline{Project: Kores india}}{}{\href{https://github.com/manojksv1/kms-documents}{\uline{Source Code}}}
+       \resumeTrioHeading{\uline{Project: Encryption Mechanism (Kores india)}}{}{\href{https://github.com/manojksv1/kms-documents}{\uline{Source Code}}}
      \resumeItemListStart{}
         \resumeItem{Gathered information from the client about their requirements regarding encryption mechanism.}
         \resumeItem{Proposed the solution using \textbf{AWS KMS encryption} mechanism with detailed documents.}
@@ -258,7 +260,7 @@
     \resumeQuadHeading{Bachelor of Technology}{GITAM Institute of Technology, Bengaluru}
     {Electronics and Communication Engineering - 7.77 CGPA}{May 2017 -- may 2021}
     \resumeQuadHeading{PUC}{Government PU College, Doddabelavangala}
-    {PCMB - 69Percentage}{June 2015 -- may 2017}
+    {PCMB - 69.16 Percentage}{June 2015 -- may 2017}
   \resumeHeadingListEnd{}
 %---------------------------------------------
 
