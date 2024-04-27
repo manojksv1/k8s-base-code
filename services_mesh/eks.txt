@@ -1,0 +1,24 @@
+# Create Cluster
+eksctl create cluster --name=eksdemo1 --region=ap-south-1 --zones=ap-south-1a,ap-south-1b --without-nodegroup
+
+#associate oidc iam
+eksctl utils associate-iam-oidc-provider --region ap-south-1 --cluster eksdemo1 --approve
+
+#create node group
+eksctl create nodegroup --cluster=eksdemo1 --region=ap-south-1 --name=eksdemo1-ng-public1 --node-type=t3.medium --nodes=2 --nodes-min=2 --nodes-max=2 --node-volume-size=15 --ssh-access --ssh-public-key=ksv --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access 
+
+#download the estio 
+https://istio.io/latest/docs/setup/getting-started/
+
+# after downloading add the path to env
+export PATH="$PATH:/home/ksv/Desktop/k8s-base-code/services_mesh/istio-1.21.2/istio-1.21.2/bin"
+
+#install the istio
+istioctl install --set  profile=demo -y
+
+#give addess to default namespace
+kubectl label namespace default istio-injection=enabled
+
+
+#delete cluster
+eksctl delete cluster eksdemo1

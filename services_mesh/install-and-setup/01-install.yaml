@@ -1,0 +1,12 @@
+# Install Istio
+
+- Follow the link
+https://istio.io/latest/docs/setup/getting-started/
+
+
+export PATH="$PATH:/home/ksv/Desktop/k8s-base-code/services_mesh/istio-1.21.2/istio-1.21.2/bin"
+
+istioctl install --set  profile=demo -y
+
+kubectl label namespace default istio-injection=enabled
+
