@@ -22,3 +22,5 @@ kubectl label namespace default istio-injection=enabled
 
 #delete cluster
 eksctl delete cluster eksdemo1
+
+#
