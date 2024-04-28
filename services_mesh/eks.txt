@@ -40,7 +40,7 @@ https://istio.io/latest/docs/setup/getting-started/
 #########################################################################################
 # Open the application to outside traffic
 
-1. kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+1. kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml     (gateway and vertual service)
 
 2. istioctl analyze
 
@@ -82,3 +82,5 @@ kubectl rollout status deployment/kiali -n istio-system
 #########################################################################################
 #delete cluster
 eksctl delete cluster eksdemo1
+
+sudo rm -r istio
