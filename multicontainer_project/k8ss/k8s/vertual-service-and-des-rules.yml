@@ -1,0 +1,92 @@
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: DestinationRule
+# metadata:
+#   name: client-cluster-ip-service
+# spec:
+#   host: client-cluster-ip-service
+  # subsets:
+  #   - name: v1
+  #     labels:
+  #       component: web
+
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#   name: client-cluster-ip-service
+# spec:
+#   hosts:
+#     - client-cluster-ip-service
+#   http:
+#     - route:
+#         - destination:
+#             host: client-cluster-ip-service
+          # subset: v1
+          # weight: 50
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: DestinationRule
+# metadata:
+#   name: server-cluster-ip-service
+# spec:
+#   host: server-cluster-ip-service
+  # subsets:
+  #   - name: v1
+  #     labels:
+  #       component: server
+
+# ---
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#   name: server-cluster-ip-service
+# spec:
+#   hosts:
+#     - server-cluster-ip-service
+#   http:
+#     - route:
+#         - destination:
+#             host: server-cluster-ip-service
+#           # subset: v1
+#           # weight: 50
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: postgres-cluster-ip-service
+spec:
+  host: postgres-cluster-ip-service
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: postgres-cluster-ip-service
+spec:
+  hosts:
+    - postgres-cluster-ip-service
+  http:
+    - route:
+        - destination:
+            host: postgres-cluster-ip-service
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: redis-cluster-ip-service
+spec:
+  host: redis-cluster-ip-service
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: redis-cluster-ip-service
+spec:
+  hosts:
+    - redis-cluster-ip-service
+  http:
+    - route:
+        - destination:
+            host: redis-cluster-ip-service            
