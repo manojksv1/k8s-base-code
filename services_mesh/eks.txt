@@ -31,6 +31,8 @@ https://istio.io/latest/docs/setup/getting-started/
 
 1. kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
 
+kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
+
 2. kubectl get services
 
 3. kubectl get pods

@@ -1,0 +1,86 @@
+# Create Cluster
+eksctl create cluster --name=eksdemo1 --region=ap-south-1 --zones=ap-south-1a,ap-south-1b --without-nodegroup
+
+#associate oidc iam
+eksctl utils associate-iam-oidc-provider --region ap-south-1 --cluster eksdemo1 --approve
+
+#create node group
+eksctl create nodegroup --cluster=eksdemo1 --region=ap-south-1 --name=eksdemo1-ng-public1 --node-type=t3.medium --nodes=2 --nodes-min=2 --nodes-max=2 --node-volume-size=15 --ssh-access --ssh-public-key=ksv --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access 
+######################################################################################
+#download the estio 
+https://istio.io/latest/docs/setup/getting-started/
+
+1. curl -L https://istio.io/downloadIstio | sh -
+
+
+# after downloading add the path to env
+1.a export PATH="$PATH:/home/ksv/Desktop/k8s-base-code/services_mesh/istio-1.21.2/istio-1.21.2/bin"
+
+2. cd istio
+
+3. export PATH=$PWD/bin:$PATH
+#######################################################################################
+#install the istio
+1. istioctl install --set  profile=demo -y
+
+#give addess to default namespace  IMP
+2.kubectl label namespace default istio-injection=enabled
+
+#########################################################################################
+#Deploy the sample application
+
+1. kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+
+2. kubectl get services
+
+3. kubectl get pods
+
+4. kubectl exec "$(kubectl get pod -l app=ratings -o jsonpath='{.items[0].metadata.name}')" -c ratings -- curl -sS productpage:9080/productpage | grep -o "<title>.*</title>"
+
+#########################################################################################
+# Open the application to outside traffic
+
+1. kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml     (gateway and vertual service)
+
+2. istioctl analyze
+
+
+#########################################################################################
+# Determining the ingress IP and ports
+
+1. kubectl get svc istio-ingressgateway -n istio-system
+
+2. export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+    export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="https")].port}')
+
+3. Set GATEWAY_URL:
+
+Copy past host url
+
+4. kubectl get svc istio-ingressgateway -n istio-system (get url from here)
+5. export INGRESS_HOST=af9bd8e1000f04b4386d035b30fbce83-111529501.ap-south-1.elb.amazonaws.com
+6. export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+7. echo $GATEWAY_URL
+#########################################################################################
+
+#Verify external access
+
+1. echo "http://$GATEWAY_URL/productpage"
+
+#########################################################################################
+
+#View the dashboard
+
+1. kubectl apply -f samples/addons
+kubectl rollout status deployment/kiali -n istio-system
+
+2. istioctl dashboard kiali
+
+3. istioctl dashboard jaeger
+
+#########################################################################################
+#delete cluster
+eksctl delete cluster eksdemo1
+
+sudo rm -r istio

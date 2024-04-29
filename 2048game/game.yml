@@ -1,13 +1,8 @@
-# ---
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   name: game-2048
-# ---
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  #namespace: game-2048
+  namespace: game-2048
   name: deployment-2048
 spec:
   selector:
@@ -29,34 +24,70 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  #namespace: game-2048
+  namespace: game-2048
   name: service-2048
 spec:
   ports:
     - port: 80
       targetPort: 80
       protocol: TCP
-  type: NodePort
+  # type: NodePort
   selector:
     app.kubernetes.io/name: app-2048
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   namespace: game-2048
+#   name: ingress-2048
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+# spec:
+#   ingressClassName: alb
+#   rules:
+#     - http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: service-2048
+#               port:
+#                 number: 80
+# ---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
 metadata:
-  #namespace: game-2048
   name: ingress-2048
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+  namespace: game-2048
 spec:
-  ingressClassName: alb
-  rules:
-    - http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: service-2048
-              port:
-                number: 80
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ingress-2048
+  namespace: game-2048
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - ingress-2048
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: service-2048.game-2048.svc.cluster.local
+        port:
+          number: 80
