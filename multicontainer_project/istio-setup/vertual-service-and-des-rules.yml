@@ -1,14 +1,14 @@
-# ---
-# apiVersion: networking.istio.io/v1beta1
-# kind: DestinationRule
-# metadata:
-#   name: client-cluster-ip-service
-# spec:
-#   host: client-cluster-ip-service
-  # subsets:
-  #   - name: v1
-  #     labels:
-  #       component: web
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: client-cluster-ip-service
+spec:
+  host: client-cluster-ip-service
+  subsets:
+    - name: v1
+      labels:
+        component: web
 
 # ---
 # apiVersion: networking.istio.io/v1beta1
@@ -22,32 +22,32 @@
 #     - route:
 #         - destination:
 #             host: client-cluster-ip-service
-          # subset: v1
-          # weight: 50
-# ---
-# apiVersion: networking.istio.io/v1beta1
-# kind: DestinationRule
-# metadata:
-#   name: server-cluster-ip-service
-# spec:
-#   host: server-cluster-ip-service
+#           subset: v1
+#           weight: 100
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: server-cluster-ip-service
+spec:
+  host: server-cluster-ip-service
   # subsets:
   #   - name: v1
   #     labels:
   #       component: server
 
-# ---
-# apiVersion: networking.istio.io/v1beta1
-# kind: VirtualService
-# metadata:
-#   name: server-cluster-ip-service
-# spec:
-#   hosts:
-#     - server-cluster-ip-service
-#   http:
-#     - route:
-#         - destination:
-#             host: server-cluster-ip-service
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: server-cluster-ip-service
+spec:
+  hosts:
+    - server-cluster-ip-service
+  http:
+    - route:
+        - destination:
+            host: server-cluster-ip-service
 #           # subset: v1
 #           # weight: 50
 ---
