@@ -55,6 +55,7 @@ Step#9:Expose Prometheus and Grafana to the external world
     1. kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus
     2. change it from Cluster IP to LoadBalancer after changing make sure you save the file
     3. kubectl get svc -n prometheus
+    4. Port number 9090
 
     EDIT GRAFANA ALSO
 
