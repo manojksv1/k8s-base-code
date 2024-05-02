@@ -1,16 +1,70 @@
-# Create Cluster
-eksctl create cluster --name=eksdemo1 --region=ap-south-1 --zones=ap-south-1a,ap-south-1b --without-nodegroup
+Monitoring AWS EKS using Prometheus and Grafana
 
-#create node group
-eksctl create nodegroup --cluster=eksdemo1 --region=ap-south-1 --name=eksdemo1-ng-public1 --node-type=t3.medium --nodes=2 --nodes-min=2 --nodes-max=2 --node-volume-size=15 --ssh-access --ssh-public-key=ksv --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access 
+Step#1:Install and Setup kubectl on Ubuntu Server
 
-# create namespace
-kubectl create namespace monitoring
+    1. sudo curl --silent --location -o /usr/local/bin/kubectl   https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+    2. sudo chmod +x /usr/local/bin/kubectl 
+    3. kubectl version --short --client
 
-#get helm chart for prometheus and install it
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
-helm install prometheus prometheus-community/prometheus -n monitoring
+Step#2:Install and Setup eksctl on Ubuntu Server
+    
+    1. curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+    2. sudo mv /tmp/eksctl /usr/local/bin
+    3. eksctl version
 
-#delete cluster
-eksctl delete cluster eksdemo1
+Step#3:Install Helm Chart on Ubuntu Server
+
+    1. curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    2. chmod 700 get_helm.sh
+    3. ./get_helm.sh
+
+        DESIRED_VERSION=v3.8.2 bash get_helm.sh
+        curl -L https://git.io/get_helm.sh | bash -s -- --version v3.8.2
+    4. helm version
+
+Step#4:Creating an Amazon EKS Cluster using eksctl
+    1. eksctl create cluster --name=eksdemo1 --region=ap-south-1 --zones=ap-south-1a,ap-south-1b --without-nodegroup
+    2. eksctl utils associate-iam-oidc-provider --region ap-south-1 --cluster eksdemo1 --approve
+    3. eksctl create nodegroup --cluster=eksdemo1 --region=ap-south-1 --name=eksdemo1-ng-public1 --node-type=c6a.xlarge --nodes=2 --nodes-min=2 --nodes-max=2 --node-volume-size=15 --ssh-access --ssh-public-key=ksv --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access 
+    4. eksctl get cluster
+    5. aws eks update-kubeconfig --name eksdemo1 --region ap-south-1
+    6. kubectl get nodes
+    7. kubectl get ns
+
+Step#5:Add Helm Stable Charts for Your Local Client
+
+    1. helm repo add stable https://charts.helm.sh/stable
+
+Step#6:Add Prometheus Helm Repository
+
+    1. helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+Step#7:Create Prometheus Namespace
+
+    1. kubectl create namespace prometheus
+    2. kubectl get ns
+
+Step#8:Install Prometheus using Helm
+
+    1. helm install stable prometheus-community/kube-prometheus-stack -n prometheus
+    2. kubectl get pods -n prometheus
+    3. kubectl get svc -n prometheus
+
+Step#9:Expose Prometheus and Grafana to the external world
+
+    1. kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus
+    2. change it from Cluster IP to LoadBalancer after changing make sure you save the file
+    3. kubectl get svc -n prometheus
+
+    EDIT GRAFANA ALSO
+
+    1. kubectl edit svc stable-grafana -n prometheus
+    2. change it from Cluster IP to LoadBalancer after changing make sure you save the file
+    3. kubectl get svc -n prometheus
+    4. User name is "admin"
+    5. kubectl get secret --namespace prometheus stable-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+    6. get password from above command
+
+Step#10:Clean up/Deprovision-Deleting the Cluster
+
+    1. eksctl delete cluster eksdemo1

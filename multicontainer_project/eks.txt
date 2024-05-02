@@ -61,4 +61,3 @@ eksctl delete cluster eksdemo1
 
 
 docker pull manojvaibhav2019/server:v1
-
