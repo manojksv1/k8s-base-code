@@ -10,7 +10,7 @@ terraform {
 terraform {
   backend "s3" {
     bucket         = "terraformstatefilecopymanoj"
-    key            = "terraform/default.tfstate"
+    key            = "terraform/k8s/default.tfstate"
     region         = "ap-south-1"
     dynamodb_table = "terraform_lock"
   }

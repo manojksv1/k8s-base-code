@@ -8,6 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/subnets: subnet-01010603dab7b1aa5, subnet-00a44bc102a1c8621, subnet-015144b040dd6c7d3
 spec:
   ingressClassName: alb
   rules:

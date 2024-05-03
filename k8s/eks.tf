@@ -1,5 +1,5 @@
 resource "aws_iam_role" "eks" {
-  name = "eks-cluster-eks"
+  name = "eks-cluster-Role"
 
   assume_role_policy = <<POLICY
 {
@@ -22,6 +22,11 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEKSClusterPolicy" {
   role       = aws_iam_role.eks.name
 }
 
+resource "aws_iam_role_policy_attachment" "eks-AmazonEKSVPCResourceController" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+  role       = aws_iam_role.eks.name
+}
+
 resource "aws_eks_cluster" "eks_cluster" {
   name     = "eks_cluster"
   role_arn = aws_iam_role.eks.arn
@@ -30,5 +35,6 @@ resource "aws_eks_cluster" "eks_cluster" {
     subnet_ids = concat(module.vpc.private-subnet, module.vpc.public-subnet)
   }
 
-  depends_on = [aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy]
+  depends_on = [aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
+  aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController]
 }
