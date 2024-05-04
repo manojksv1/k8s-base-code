@@ -1,6 +1,6 @@
 variable "aws-region" {
   description = "Enter the aws region to work"
-  default     = "ap-south-1"
+  default     = "ap-southeast-1"
 }
 
 variable "key_name" {

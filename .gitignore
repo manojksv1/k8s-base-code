@@ -1,2 +1,3 @@
 /k8s/.terraform
 /k8s/.terraform.lock.hcl
+/k8s/istio-1.21.2
