@@ -46,7 +46,7 @@ resource "aws_eks_node_group" "private-nodes" {
   subnet_ids = module.vpc.private-subnet
 
   capacity_type  = "ON_DEMAND"
-  instance_types = ["c6a.xlarge"]
+  instance_types = [var.node_type_instance]
 
   scaling_config {
     desired_size = 2

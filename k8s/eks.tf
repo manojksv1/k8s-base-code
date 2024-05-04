@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEKSVPCResourceController" {
 }
 
 resource "aws_eks_cluster" "eks_cluster" {
-  name     = "eks_cluster"
+  name     = "eks_cluster_dev"
   role_arn = aws_iam_role.eks.arn
 
   vpc_config {

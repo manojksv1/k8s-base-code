@@ -1,10 +1,10 @@
 variable "aws-region" {
   description = "Enter the aws region to work"
-  default     = "ap-southeast-1"
+  default     = "ap-south-1"
 }
 
 variable "key_name" {
-  default = "ksv-singapur" #"ksv"
+  default = "ksv-singapur" 
 }
 
 
@@ -23,4 +23,8 @@ variable "db-ip-cidr" {
 variable "nat_server_status" {
   type    = bool
   default = true
+}
+
+variable "node_type_instance" {
+  default = "c6a.xlarge"
 }
