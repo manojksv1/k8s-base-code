@@ -1,0 +1,14 @@
+docker tag redis:latest 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:redis_1
+docker push 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:redis_1
+
+docker tag manojvaibhav2019/server:latest 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:server_1
+docker push 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:server_1
+
+docker tag rallycoding/multi-worker:latest 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:worker_1
+docker push 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:worker_1
+
+docker tag rallycoding/multi-client:latest 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:client_1
+docker push 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:client_1
+
+docker tag postgres:latest 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:postgres_1
+docker push 637423386220.dkr.ecr.ap-south-1.amazonaws.com/fib-prod-env:postgres_1
