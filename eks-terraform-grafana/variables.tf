@@ -4,7 +4,7 @@ variable "aws-region" {
 }
 
 variable "key_name" {
-  default = "ksv-singapur" 
+  default = "ksv-singapur"
 }
 
 
@@ -26,5 +26,5 @@ variable "nat_server_status" {
 }
 
 variable "node_type_instance" {
-  default = "c6a.xlarge"
+  default = "t3a.medium"
 }
