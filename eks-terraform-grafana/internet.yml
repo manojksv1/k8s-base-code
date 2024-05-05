@@ -9,5 +9,5 @@ spec:
     command: ["sleep", "infinity"]
     resources:
       limits:
-        cpu: "500m"
-        memory: "256Mi"
+        cpu: "50m"
+        memory: "50Mi"

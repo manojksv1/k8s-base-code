@@ -26,5 +26,5 @@ variable "nat_server_status" {
 }
 
 variable "node_type_instance" {
-  default = "t3a.medium"
+  default = "c6a.xlarge"
 }
