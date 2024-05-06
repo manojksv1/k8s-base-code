@@ -29,6 +29,15 @@ variable "env" {
   default = "Developement"
 }
 
-variable "project" {
+variable "alb-name" {
+  default = "smartminingsolution-alb"
+}
+
+variable "Ecr-repo-name" {
   default = "smartminingsolution"
+}
+
+variable "cluster-name" {
+  default = "smartminingsolution"
+  
 }

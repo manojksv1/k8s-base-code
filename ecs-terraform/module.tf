@@ -13,7 +13,23 @@ module "vpc" {
   nat_server_status      = var.nat_server_status
 }
 
+module "ALB" {
+  source = "./module/alb"  
+  alb_name = var.alb-name
+  vic-id = module.vpc.vpc
+  Environment = var.env
+  public-subnet-list = module.vpc.public-subnet
+}
+
+module "ecr" {
+  source = "./module/ecr"
+  repo-name =var.Ecr-repo-name
+}
+
+module "ecs" {
+  source = "./module/ecs"
+  cluster-name = var.cluster-name
+}
 module "artifacts-bucket" {
   source = "./module/artifacts_buckets"
-
 }

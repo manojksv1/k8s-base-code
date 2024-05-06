@@ -1,21 +1,21 @@
 resource "aws_lb" "loadbalancer" {
-  name               = var.project
+  name               = var.alb_name
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_http.id]
-  subnets            = module.vpc.public-subnet
+  subnets            = var.public-subnet-list
 
   enable_deletion_protection = false
 
   tags = {
-    Environment = var.env
+    Environment = var.Environment
   }
 }
 
 resource "aws_security_group" "allow_http" {
   name        = "allow_http"
   description = "Allow HTTP inbound traffic"
-  vpc_id      = module.vpc.vpc
+  vpc_id      = var.vic-id
 
   ingress = [
     {

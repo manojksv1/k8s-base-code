@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "python_app_repo" {
-  name                 = "smart_mining_solution"
+resource "aws_ecr_repository" "docker_repo" {
+  name                 = var.repo-name
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

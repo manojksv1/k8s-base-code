@@ -3,3 +3,4 @@
 /k8s-istio/istio-1.21.2
 /eks-terraform-grafana/.terraform
 /eks-terraform-grafana/.terraform.lock.hcl
+/ecs-terraform/.terraform

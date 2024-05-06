@@ -3,7 +3,7 @@ resource "aws_lb_target_group" "web-ui" {
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = module.vpc.vpc
+  vpc_id      = var.vic-id
   health_check {
     path                = "/"
     interval            = 30
@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "api" {
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = module.vpc.vpc
+  vpc_id      = var.vic-id
   health_check {
     path                = "/api"
     interval            = 30
