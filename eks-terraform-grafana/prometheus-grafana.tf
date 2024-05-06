@@ -16,4 +16,5 @@ resource "helm_release" "prometheus" {
   create_namespace = true
   repository = var.prometheus_community_repo_url
   chart      = "kube-prometheus-stack"
+  depends_on = [ aws_eks_cluster.eks_cluster, aws_eks_node_group.private-nodes ]
 }
