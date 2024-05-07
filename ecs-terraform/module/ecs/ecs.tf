@@ -57,7 +57,7 @@ resource "aws_ecs_task_definition" "python_task" {
 
   placement_constraints {
     type       = "memberOf"
-    expression = "attribute:ecs.availability-zone in ${var.azlist}"
+    expression = "attribute:ecs.availability-zone in ${join(",", var.azlist)}"
   }
 }
 
@@ -72,7 +72,7 @@ resource "aws_launch_configuration" "ecs_launch_config" {
 
 resource "aws_autoscaling_group" "ecs_auto_scaling_group" {
   name                 = "asg"
-  vpc_zone_identifier  = [var.public_subnet[0].id]
+  vpc_zone_identifier  = [var.public_subnet]
   launch_configuration = aws_launch_configuration.ecs_launch_config.name
 
   desired_capacity          = 1
