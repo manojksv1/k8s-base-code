@@ -29,8 +29,15 @@ variable "env" {
   default = "Developement"
 }
 
+variable "code-repo-name" {
+  default = "smartminingsolution-code-repo"
+}
 variable "alb-name" {
   default = "smartminingsolution-alb"
+}
+
+variable "artifact-bucket-name" {
+  default = "smartminingsolutionartifactsbucket"
 }
 
 variable "Ecr-repo-name" {
@@ -39,5 +46,5 @@ variable "Ecr-repo-name" {
 
 variable "cluster-name" {
   default = "smartminingsolution"
-  
+
 }
