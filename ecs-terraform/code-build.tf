@@ -1,7 +1,7 @@
 
 resource "aws_codebuild_project" "containerAppBuild" {
   badge_enabled  = false
-  build_timeout  = 600
+  build_timeout  = 60
   name           = "container-app-build"
   queued_timeout = 480
   service_role   = aws_iam_role.containerAppBuildProjectRole.arn

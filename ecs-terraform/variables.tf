@@ -48,3 +48,7 @@ variable "cluster-name" {
 variable "repo-name" {
   default = "mono-repo-2024"
 }
+
+variable "container-name" {
+  default = "web-page"
+}

@@ -6,14 +6,14 @@ resource "aws_ecs_cluster" "smart_mining_solution_com" {
     value = "enabled"
   }
 }
+data "aws_caller_identity" "current" {}
 
 resource "aws_ecs_service" "python_service" {
-  name            = "python-service"
+  name            = "front-end"
   cluster         = aws_ecs_cluster.smart_mining_solution_com.id
   task_definition = aws_ecs_task_definition.python_task.arn
   desired_count   = 1
-  iam_role        = aws_iam_role.ecs_service_role.arn
-  depends_on      = [aws_iam_role_policy.ecs_policy, aws_ecs_task_definition.python_task]
+  iam_role        = var.ecs_service_role.arn
 
   ordered_placement_strategy {
     type  = "binpack"
@@ -21,9 +21,9 @@ resource "aws_ecs_service" "python_service" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.lb_target.arn
-    container_name   = "web-page"
-    container_port   = "80"
+    target_group_arn = var.lb_target.arn
+    container_name   = var.container-name
+    container_port   = var.container-port
   }
 
   # placement_constraints {
@@ -36,14 +36,14 @@ resource "aws_ecs_task_definition" "python_task" {
   family = "service"
   container_definitions = jsonencode([
     {
-      name      = var.container_name
-      image     = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${aws_ecr_repository.python_app_repo.name}:latest"
-      cpu       = 10
-      memory    = 512
+      name      = var.container-name
+      image     = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${var.repo-name}:latest"
+      cpu       = 50
+      memory    = 128
       essential = true
       portMappings = [
         {
-          containerPort = var.container_port
+          containerPort = var.container-port
           hostPort      = 0
         }
       ]
@@ -57,22 +57,22 @@ resource "aws_ecs_task_definition" "python_task" {
 
   placement_constraints {
     type       = "memberOf"
-    expression = "attribute:ecs.availability-zone in [us-west-2a, us-west-2b]"
+    expression = "attribute:ecs.availability-zone in ${var.azlist}"
   }
 }
 
 
 resource "aws_launch_configuration" "ecs_launch_config" {
   image_id             = var.ecs_image_ami
-  iam_instance_profile = aws_iam_instance_profile.ecs_agent.name
+  iam_instance_profile = var.ecs_agent.name
   security_groups      = [aws_security_group.allow_ecs.id]
-  user_data            = "#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.python_app_cluster.name} >> /etc/ecs/ecs.config"
+  user_data            = "#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.smart_mining_solution_com.name} >> /etc/ecs/ecs.config"
   instance_type        = "t2.medium"
 }
 
 resource "aws_autoscaling_group" "ecs_auto_scaling_group" {
   name                 = "asg"
-  vpc_zone_identifier  = [aws_subnet.public_subnet[0].id]
+  vpc_zone_identifier  = [var.public_subnet[0].id]
   launch_configuration = aws_launch_configuration.ecs_launch_config.name
 
   desired_capacity          = 1
@@ -80,4 +80,29 @@ resource "aws_autoscaling_group" "ecs_auto_scaling_group" {
   max_size                  = 1
   health_check_grace_period = 300
   health_check_type         = "EC2"
+}
+
+resource "aws_security_group" "allow_ecs" {
+  name        = "allow_ecs"
+  description = "Allow all inbound traffic"
+  vpc_id      = var.web_vpc
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
+  tags = {
+    Name = "allow_ecs"
+  }
 }

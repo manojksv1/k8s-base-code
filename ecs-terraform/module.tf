@@ -27,8 +27,17 @@ module "ecr" {
 }
 
 module "ecs" {
-  source       = "./module/ecs"
-  cluster-name = var.cluster-name
+  source           = "./module/ecs"
+  cluster-name     = var.cluster-name
+  ecs_service_role = aws_iam_role.ecs_service_role
+  lb_target        = module.ALB.alb_target
+  aws_region       = var.aws-region
+  repo-name        = var.repo-name
+  azlist           = module.avalability-zones.aws-azs
+  ecs_agent        = aws_iam_instance_profile.ecs_agent
+  public_subnet    = module.vpc.public-subnet[0]
+  web_vpc          = module.vpc.vpc
+
 }
 module "artifacts-bucket" {
   source      = "./module/artifacts_buckets"
