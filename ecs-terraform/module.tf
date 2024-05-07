@@ -21,12 +21,6 @@ module "ALB" {
   public-subnet-list = module.vpc.public-subnet
 }
 
-module "coderepo_create" {
-  source    = "./module/codecommit"
-  repo-name = var.code-repo-name
-
-}
-
 module "ecr" {
   source    = "./module/ecr"
   repo-name = var.Ecr-repo-name
@@ -37,8 +31,8 @@ module "ecs" {
   cluster-name = var.cluster-name
 }
 module "artifacts-bucket" {
-  source = "./module/artifacts_buckets"
-  env_name = var.env
-  aws_region = var.aws-region
+  source      = "./module/artifacts_buckets"
+  env_name    = var.env
+  aws_region  = var.aws-region
   bucket_name = var.artifact-bucket-name
 }
