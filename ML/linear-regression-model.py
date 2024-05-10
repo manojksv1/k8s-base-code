@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression
 
 # Example data generation (replace with your actual data)
 np.random.seed(0)
-prices = np.random.randint(100, 200, 2500000)  # Random prices between 100 and 200 for 1000 time points
+prices = np.random.randint(100, 200, 1000)  # Random prices between 100 and 200 for 1000 time points
 
 # Function to create dataset for regression
 def create_dataset(prices, window_size=200):
@@ -20,6 +20,7 @@ def create_dataset(prices, window_size=200):
 
 # Create dataset
 X, y = create_dataset(prices)
+print(X)
 
 # Splitting the dataset into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
