@@ -1,13 +1,23 @@
-apiVersion: v1
-kind: Pod
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: python-exec
+  name: ingress-service
+  namespace: prometheus
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/subnets: subnet-090b039425b947318, subnet-038e2202a11fdd840, subnet-0136a2a13c1b30a4b
 spec:
-  containers:
-  - name: python-container
-    image: python:3.9
-    command: ["sleep", "infinity"]
-    resources:
-      limits:
-        cpu: "50m"
-        memory: "50Mi"
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus-grafana
+                port:
+                  number: 80

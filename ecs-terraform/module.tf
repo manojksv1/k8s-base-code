@@ -39,9 +39,9 @@ module "ecs" {
   web_vpc          = module.vpc.vpc
 
 }
-module "artifacts-bucket" {
-  source      = "./module/artifacts_buckets"
-  env_name    = var.env
-  aws_region  = var.aws-region
-  bucket_name = var.artifact-bucket-name
-}
+# module "artifacts-bucket" {
+#   source      = "./module/artifacts_buckets"
+#   env_name    = var.env
+#   aws_region  = var.aws-region
+#   bucket_name = var.artifact-bucket-name
+# }
