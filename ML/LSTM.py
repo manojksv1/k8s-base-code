@@ -3,14 +3,16 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
+from  output import a
 
 # Assuming you have your data in a list or numpy array called 'prices'
 # where prices[i] represents the price at time i.
 
 # Example data generation (replace with your actual data)
 np.random.seed(0)
-prices = np.random.randint(100, 200, 5000)  # Random prices between 100 and 200 for 1000 time points
+prices = np.array(a)#np.random.randint(100, 1000, 1000)  # Random prices between 100 and 200 for 1000 time points
 
+print(prices)
 # Normalize the data
 scaler = MinMaxScaler(feature_range=(0, 1))
 prices_scaled = scaler.fit_transform(prices.reshape(-1, 1))
@@ -48,4 +50,20 @@ last_200_prices = prices_scaled[-200:].reshape(1, -1, 1)
 next_5_prices_scaled = model.predict(last_200_prices)
 next_5_prices = scaler.inverse_transform(next_5_prices_scaled)
 
-print("Predicted next 5 prices:", next_5_prices.flatten())
+print("Next Price is = ", next_5_prices.flatten())
+
+# print("#"*77)
+
+# next_5_prices_scaled = []
+# current_prices = prices_scaled[-200:].reshape(1, -1, 1)
+
+# for _ in range(5):
+#     next_price_scaled = model.predict(current_prices)
+#     next_5_prices_scaled.append(next_price_scaled[0, 0])  # Append the predicted price
+#     current_prices = np.roll(current_prices, -1, axis=1)  # Roll the array to remove the oldest price
+#     current_prices[0, -1, 0] = next_price_scaled  # Add the predicted price at the end
+
+# # Inverse transform the scaled prices to get the actual prices
+# next_5_prices = scaler.inverse_transform(np.array(next_5_prices_scaled).reshape(-1, 1))
+
+# print("Predicted next 5 prices:", next_5_prices.flatten())
