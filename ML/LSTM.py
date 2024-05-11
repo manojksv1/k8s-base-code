@@ -3,16 +3,14 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
-from  output import a
 
+    
 # Assuming you have your data in a list or numpy array called 'prices'
 # where prices[i] represents the price at time i.
 
 # Example data generation (replace with your actual data)
 np.random.seed(0)
-prices = np.array(a)#np.random.randint(100, 1000, 1000)  # Random prices between 100 and 200 for 1000 time points
-
-print(prices)
+prices = np.array(column_list)#np.random.randint(100, 1000, 1000)  # Random prices between 100 and 200 for 1000 time points
 # Normalize the data
 scaler = MinMaxScaler(feature_range=(0, 1))
 prices_scaled = scaler.fit_transform(prices.reshape(-1, 1))
