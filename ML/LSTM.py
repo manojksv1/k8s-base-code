@@ -4,6 +4,9 @@ from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
 
+df = pd.read_csv('train.csv')
+column_list = df['close'].tolist()
+
     
 # Assuming you have your data in a list or numpy array called 'prices'
 # where prices[i] represents the price at time i.
@@ -41,7 +44,7 @@ model.add(LSTM(units=50))
 model.add(Dense(units=1))
 
 model.compile(optimizer='adam', loss='mean_squared_error')
-model.fit(X_train, y_train, epochs=100, batch_size=32)
+model.fit(X_train, y_train, epochs=20, batch_size=32)
 
 # Predict next 5 prices
 last_200_prices = prices_scaled[-200:].reshape(1, -1, 1)

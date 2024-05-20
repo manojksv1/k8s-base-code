@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-df = pd.read_csv('train2.csv')
+df = pd.read_csv('train.csv')
 column_list = df['close'].tolist()
 
 # Assuming you have your data in a list or numpy array called 'prices'
