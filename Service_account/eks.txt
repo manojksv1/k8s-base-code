@@ -18,7 +18,8 @@ aws iam create-policy \
 
 
 eksctl create iamserviceaccount \
-  --cluster=eksdemo1 \
+  --cluster=eks-cluster-dev \
+  --region=ap-southeast-1 \
   --namespace=kube-system \
   --name=s3-read-access \
   --role-name s3_read_bucket \
