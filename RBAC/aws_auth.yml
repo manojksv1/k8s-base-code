@@ -8,14 +8,8 @@ data:
     - groups:
       - system:bootstrappers
       - system:nodes
-      rolearn: arn:aws:iam::637423386220:role/eksctl-eksdemo1-nodegroup-eksdemo1-NodeInstanceRole-17HEunBiakbt
+      rolearn: arn:aws:iam::637423386220:role/eks-node-group-Roles
       username: system:node:{{EC2PrivateDNSName}}
   mapUsers: |
-    - userarn: arn:aws:iam::637423386220:user/eks-cluster-trainee
-      username: eks-trainee
-    - userarn: arn:aws:iam::637423386220:user/eks-cluster-developer
+    - userarn: arn:aws:iam::637423386220:user/developer
       username: eks-developer
-    - userarn: arn:aws:iam::637423386220:user/eks-cluster-super-admin
-      groups:
-      - system:masters
-      username: eks-super-admin
