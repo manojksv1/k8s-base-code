@@ -30,6 +30,7 @@ resource "aws_iam_role_policy_attachment" "eks-AmazonEKSVPCResourceController" {
 resource "aws_eks_cluster" "eks_cluster" {
   name     = "eks-cluster-dev"
   role_arn = aws_iam_role.eks.arn
+  version = "1.29"
 
   vpc_config {
     subnet_ids = concat(module.vpc.private-subnet, module.vpc.public-subnet)
